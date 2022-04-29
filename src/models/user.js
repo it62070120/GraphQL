@@ -1,5 +1,6 @@
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 import { model, Schema } from 'mongoose';
+import mongooseBcrypt from 'mongoose-bcrypt';
 
 const UserSchema = new Schema({
     username: {
@@ -13,6 +14,7 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
+        bcrypt: true,
     },
     name: {
         type: String,
@@ -25,7 +27,8 @@ const UserSchema = new Schema({
         lowercase: true,
         trim: true,
     }
-})
+});
+UserSchema.plugin(mongooseBcrypt);
 
 export const UserModel = model('User', UserSchema);
 

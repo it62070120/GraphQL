@@ -1,7 +1,7 @@
 // import { schemaComposer } from "graphql-compose";
 
 // import { generateUserToken } from '../../lib/generateUserToken'
-import { UserTC } from "../../models/user";
+import { UserModel, UserTC } from "../../models/user";
 
 export const createUser = UserTC.getResolver("createOne");
 

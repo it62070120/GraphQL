@@ -22,7 +22,8 @@
     "graphql": "^16.4.0",
     "graphql-compose": "^9.0.8",
     "graphql-compose-mongoose": "^9.7.1",
-    "mongoose": "^6.3.1"
+    "mongoose": "^6.3.1",
+    "mongoose-bcrypt": "^1.9.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
