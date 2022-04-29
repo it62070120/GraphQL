@@ -31,6 +31,7 @@ const startApolloServer = async () => {
   await apolloServer.start();
   apolloServer.applyMiddleware({ app, path: '/graphql' });
   httpServer.listen({ port: 3001 });
+  console.log("Server running at: http://localhost:3001/graphql");
 };
 
 startApolloServer();

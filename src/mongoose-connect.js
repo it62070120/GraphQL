@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const uri = 'mongodb+srv://cluster0.r4zzs.mongodb.net';
+const uri = process.env.MONGO_HOST;
 const options = {
-    dbName: 'Project',
-    user: 'Admin',
-    pass: 'Password1'
+    dbName: process.env.MONGO_DB,
+    user: process.env.MONGO_USER,
+    pass: process.env.MONGO_PASS
 }
 
 export default mongoose.connect(uri, options);
