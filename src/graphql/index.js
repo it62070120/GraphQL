@@ -1,5 +1,6 @@
 import { schemaComposer } from "graphql-compose";
 
+import './relation';
 import * as queries from './query';
 import * as mutations from './mutation';
 

@@ -6,14 +6,20 @@ const ScheduleSchema = new Schema({
         type: String,
         required: true,
     },
-    // subject: {
-    //     type: Array,
-    //     default: []
-    // },
+    subjects: {
+        type: Schema.Types.Array,
+        default: [],
+    },
     genCode: {
         type: String,
         required: true,
         unique: true,
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        index: true,
     }
 
 });
