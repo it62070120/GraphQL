@@ -2,8 +2,8 @@ import { composeWithMongoose } from 'graphql-compose-mongoose';
 import { model, Schema } from 'mongoose';
 import mongooseBcrypt from 'mongoose-bcrypt';
 
-const UserSchema = new Schema({
-    username: {
+const SubjectSchema = new Schema({
+    subjectName: {
         type: String,
         required: true,
         index: true,
@@ -11,28 +11,25 @@ const UserSchema = new Schema({
         lowercase: true,
         trim: true,
     },
-    password: {
+    date: {
         type: String,
         required: true,
         bcrypt: true,
     },
-    name: {
+    time: {
         type: String,
         required: true,
     },
-    email: {
+    link: {
         type: String,
         required: true,
         unique: true,
         lowercase: true,
         trim: true,
-    },
-    token: {
-        type: String
     }
 });
-UserSchema.plugin(mongooseBcrypt);
+SubjectSchema.plugin(mongooseBcrypt);
 
-export const UserModel = model('User', UserSchema);
+export const SubjectModel = model('Subject', SubjectSchema);
 
-export const UserTC = composeWithMongoose(UserModel);
+export const SubjectTC = composeWithMongoose(SubjectModel);
