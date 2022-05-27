@@ -6,6 +6,7 @@ import cors from 'cors';
 import express from 'express';
 
 import './mongoose-connect';
+import jsonwebtoken from 'jsonwebtoken'
 
 import schema from './graphql';
 
@@ -27,6 +28,24 @@ const startApolloServer = async () => {
       ApolloServerPluginDrainHttpServer({ httpServer }),
       ApolloServerPluginLandingPageGraphQLPlayground(),
     ],
+    context: ({ req }) => {
+      const { cookies, headers } = req
+      let token = null
+      if (cookies?.token) {
+        token = cookies?.token
+      }
+      if (headers?.authorization?.split(' ')?.[0] === 'Bearer') {
+        // Authorization: Bearer TOKEN
+        // Authorization: Basic username:password
+        token = headers?.authorization?.split(' ')?.[1]
+      }
+      if (token) {
+        const payload = jsonwebtoken.verify(token, process.env.JWT_SECRET)
+        // console.log(payload)
+        return { userId: payload.userId }
+      }
+      return { userId: null }
+    },
   });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app, path: '/graphql' });

@@ -26,7 +26,14 @@ const SubjectSchema = new Schema({
         unique: true,
         lowercase: true,
         trim: true,
+    },
+    scheduleId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Schedule',
+        required: true,
+        index: true,
     }
+
 });
 SubjectSchema.plugin(mongooseBcrypt);
 

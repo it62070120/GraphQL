@@ -2,7 +2,7 @@ import { ObjectTypeComposer, SchemaComposer, schemaComposer } from "graphql-comp
 import { ScheduleModel, ScheduleTC } from "../../models/schedule";
 
 export const schedules = ScheduleTC.getResolver('findMany');
-export const schedule = ScheduleTC.getResolver('findById');
+export const scheduleId = ScheduleTC.getResolver('findById');
 
 const SchedulePayloadOTC = schemaComposer.createObjectTC({
     name: "SchedulePayloadOTC",

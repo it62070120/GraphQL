@@ -1,6 +1,7 @@
 import { schemaComposer } from "graphql-compose";
 
 import { UserModel, UserTC } from "../../models/user";
+import { generateUserToken } from '../../lib/generateUserToken'
 
 export const createUser = UserTC.getResolver("createOne");
 
@@ -9,7 +10,7 @@ const LoginPayloadOTC = schemaComposer.createObjectTC({
     fields: {
         status: "String!",
         message: "String!",
-        User: UserTC,
+        token: 'String'
     },
 });
 
@@ -25,7 +26,7 @@ export const login = schemaComposer.createResolver({
         const { username, password } = args;
         const user = await UserModel.findOne({ username: username.toLowerCase() });
         const validPassword = await user.verifyPassword(password);
-        
+
         if (!user || !validPassword) {
             return {
                 status: "failed",
@@ -33,12 +34,13 @@ export const login = schemaComposer.createResolver({
                 User: null
             };
         }
-        
+
+        const token = generateUserToken(user)
         return {
-            status: "success",
-            message: "Login success",
-            User: user
-        };
+            status: 'success',
+            message: 'Login success',
+            token,
+        }
     },
 });
 

@@ -6,13 +6,8 @@ const ScheduleSchema = new Schema({
         type: String,
         required: true,
     },
-    subjects: {
-        type: Schema.Types.Array,
-        default: [],
-    },
-    genCode: {
+    code: {
         type: String,
-        required: true,
         unique: true,
     },
     userId: {

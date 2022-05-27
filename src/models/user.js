@@ -26,9 +26,6 @@ const UserSchema = new Schema({
         unique: true,
         lowercase: true,
         trim: true,
-    },
-    token: {
-        type: String
     }
 });
 UserSchema.plugin(mongooseBcrypt);
