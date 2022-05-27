@@ -20,12 +20,14 @@ ScheduleTC.addRelation(
 ScheduleTC.addRelation(
     'subjects',
     {
-        resolver: SubjectTC.getResolver('findById'),
+        resolver: SubjectTC.getResolver('findMany'),
         projection: {
-            scheduleId: 1
+            _id: 1
         },
         prepareArgs: {
-            _id: (subject) => subject.scheduleId,
+            filter: (subject) => ({
+                scheduleId: subject._id,
+              }),
         }
     }
 )

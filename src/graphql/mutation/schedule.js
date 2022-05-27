@@ -17,14 +17,15 @@ const AddSchedulePayloadOTC = schemaComposer.createObjectTC({
   })
 
 export const addSchedule = schemaComposer.createResolver({
-  name: 'login',
+  name: 'addSchedule',
   kind: 'mutation',
   type: AddSchedulePayloadOTC,
   args: {
-      code: 'String!'
+      code: 'String!',
+      userId: "String"
   },
   resolve: async ({args}) => {
-    const { code } = args
+    const { code, userId } = args
     const schedule = await ScheduleModel.findOne( { code : code } )
     if(!schedule){
         return {
@@ -33,9 +34,13 @@ export const addSchedule = schemaComposer.createResolver({
 
         }
     }
+    console.log("schedule : ")
     console.log(schedule)
-    const subjects = await ScheduleModel.f
-    // const createSchedule = await ScheduleModel.create({title: schedule.title})
+    const subjects = await SubjectModel.find({ scheduleId: schedule._id})
+    console.log("subjects : ")
+    console.log(subjects)
+
+    const createSchedule = await ScheduleModel.create({title: schedule.title, code: "5tdfg", userId: userId})
     return {
         status: "success",
         message: "schedule add complete"
